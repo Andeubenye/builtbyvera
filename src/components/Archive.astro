@@ -1,0 +1,23 @@
+---
+import { getCollection } from "astro:content";
+
+const archiveItems = (await getCollection("projects"))
+  .filter((project) => project.data.placement === "archive")
+  .sort((a, b) => a.data.order - b.data.order);
+---
+<section class="work-archive">
+  <div class="section-kicker">Work Archive</div>
+
+  <div class="archive-grid">
+    {archiveItems.map((item) => (
+      <a class="archive-card" href={item.data.externalUrl} target="_blank" rel="noopener">
+        <div>
+          <div class="project-type">{item.data.category}</div>
+          <h3>{item.data.title}</h3>
+        </div>
+        <p>{item.data.description}</p>
+        <span class="read-link">Read Article →</span>
+      </a>
+    ))}
+  </div>
+</section>

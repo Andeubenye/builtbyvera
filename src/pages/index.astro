@@ -1,0 +1,90 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Navigation from "../components/Navigation.astro";
+import Footer from "../components/Footer.astro";
+import FeaturedWork from "../components/FeaturedWork.astro";
+import AdoptionSection from "../components/AdoptionSection.astro";
+import Archive from "../components/Archive.astro";
+---
+
+<BaseLayout title="builtbyvera">
+  <Header />
+
+  <section class="hero">
+    <span class="prompt">$ what i do</span>
+  
+    <h1>
+      <span id="heroText"></span><span class="cursor"></span>
+    </h1>
+  
+    <div class="dots">
+      <div class="dot active"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+  
+    <span class="sticker hero-stamp" style="--r:-3deg;">✦ A perfect blend of growth, engineering, and product</span>
+  </section>
+  
+  <Navigation />
+  
+  <FeaturedWork />
+  <AdoptionSection />
+  <Archive />
+  <Footer />
+
+</BaseLayout>
+
+<script>
+  const words = [
+    "AI Integration Engineering",
+    "Product Research",
+    "Developer Education",
+    "Agentic Automation"
+  ];
+
+  const heroText = document.getElementById("heroText");
+  const dots = document.querySelectorAll(".dot");
+
+  let wordIndex = 0;
+  let charIndex = 0;
+  let deleting = false;
+
+  function type() {
+    const currentWord = words[wordIndex];
+
+    if (!deleting) {
+      heroText.textContent = currentWord.substring(0, charIndex + 1);
+      charIndex++;
+
+      if (charIndex === currentWord.length) {
+        deleting = true;
+        setTimeout(type, 1800);
+        return;
+      }
+
+      setTimeout(type, 70);
+    } else {
+      heroText.textContent = currentWord.substring(0, charIndex - 1);
+      charIndex--;
+
+      if (charIndex === 0) {
+        deleting = false;
+        wordIndex = (wordIndex + 1) % words.length;
+
+        dots.forEach((dot, i) => {
+          dot.classList.toggle("active", i === wordIndex);
+        });
+
+        setTimeout(type, 300);
+        return;
+      }
+
+      setTimeout(type, 28);
+    }
+  }
+
+  type();
+</script>

@@ -1,0 +1,49 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+}
+
+const { title = "builtbyvera" } = Astro.props as Props;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body class="dark-mode">
+
+<div class="page">
+  <slot />
+</div>
+
+<script>
+  const themeToggle = document.getElementById("themeToggle");
+  if (themeToggle) {
+    const themeIcon = themeToggle.querySelector(".theme-toggle-icon");
+    const themeLabel = themeToggle.querySelector(".theme-toggle-label");
+
+    function setTheme(dark) {
+      document.body.classList.toggle("dark-mode", dark);
+      if (themeIcon) themeIcon.textContent = dark ? "☀" : "☾";
+      if (themeLabel) themeLabel.textContent = dark ? "Light" : "Dark";
+    }
+
+    themeToggle.addEventListener("click", () => {
+      setTheme(!document.body.classList.contains("dark-mode"));
+    });
+
+    setTheme(document.body.classList.contains("dark-mode"));
+  }
+</script>
+
+</body>
+</html>

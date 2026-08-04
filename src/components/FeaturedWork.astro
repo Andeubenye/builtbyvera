@@ -1,0 +1,38 @@
+---
+import { getCollection } from "astro:content";
+
+const projects = (await getCollection("projects")).sort((a, b) => a.data.order - b.data.order);
+const leadProject = projects.find((project) => project.data.placement === "lead");
+const sideProjects = projects.filter((project) => project.data.placement === "side");
+---
+<section class="featured-work">
+  <div class="section-kicker">Featured Work</div>
+
+  <div class="work-layout">
+    {leadProject && (
+      <a class="lead-project" href={leadProject.data.externalUrl} target="_blank" rel="noopener">
+        <div class="project-visual">
+          <span class="visual-ribbon">★ Featured Build</span>
+        </div>
+        <div class="lead-copy">
+          <div class="project-type">{leadProject.data.category}</div>
+          <h2>{leadProject.data.title}</h2>
+          <p>{leadProject.data.description}</p>
+        </div>
+      </a>
+    )}
+
+    <div class="side-projects">
+      {sideProjects.map((project) => (
+        <a class="side-project" href={project.data.externalUrl} target="_blank" rel="noopener">
+          <div class={`thumb ${project.data.thumbClass}`}></div>
+          <div class="side-content">
+            <div class="project-type">{project.data.category}</div>
+            <h3>{project.data.title}</h3>
+            <p>{project.data.description}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

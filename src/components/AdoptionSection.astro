@@ -1,0 +1,43 @@
+---
+const nodes = [
+  ["node-ai", "AI Integrations"],
+  ["node-demo", "Interactive Demos"],
+  ["node-api", "API Guides"],
+  ["node-video", "Developer Videos"],
+  ["node-open", "Open Source"],
+  ["node-auto", "Automation & Workflows"],
+  ["node-visual", "Visual Storytelling"],
+  ["node-launch", "Product Launches"],
+  ["node-education", "Developer Education"],
+];
+---
+<section class="adoption-section">
+  <div class="section-kicker">Engineering Product Adoption</div>
+
+  <div class="adoption-layout">
+    <div class="adoption-copy">
+      <h2>Engineering Product Adoption</h2>
+      <p>I reduce the distance between your products and the people and AI agents that use them.</p>
+    </div>
+
+    <div class="adoption-map" aria-label="Developer adoption capability orbit">
+      <div class="orbit-ring one"></div>
+      <div class="orbit-ring two"></div>
+      <div class="orbit-ring three"></div>
+
+      <div class="orbit-path path-a"></div>
+      <div class="orbit-path path-b"></div>
+      <div class="orbit-path path-c"></div>
+      <div class="orbit-path path-d"></div>
+      <div class="orbit-path path-e"></div>
+      <div class="orbit-path path-f"></div>
+
+      <div class="orbit-core">
+        <span>Developer</span>
+        <small>Adoption</small>
+      </div>
+
+      {nodes.map(([className, label]) => <div class={`orbit-node ${className}`}>{label}</div>)}
+    </div>
+  </div>
+</section>

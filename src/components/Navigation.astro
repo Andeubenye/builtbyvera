@@ -1,0 +1,23 @@
+---
+interface Props {
+  active?: string;
+}
+
+const { active = "" } = Astro.props as Props;
+
+const links = [
+  { href: "/research/", label: "Research" },
+  { href: "/portfolio/", label: "Portfolio" },
+  { href: "/demos/", label: "Demos" },
+  { href: "/talks/", label: "Talks" },
+  { href: "/about/", label: "About" },
+];
+---
+<nav>
+  {links.map((link, i) => (
+    <>
+      <a href={link.href} class={active === link.label.toLowerCase() ? "active" : ""} target="_blank" rel="noopener">{link.label}</a>
+      {i < links.length - 1 && <span class="divider">|</span>}
+    </>
+  ))}
+</nav>
