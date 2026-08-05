@@ -1,8 +1,55 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import ComingSoon from "../components/ComingSoon.astro";
+import Header from "../components/Header.astro";
+import Navigation from "../components/Navigation.astro";
+import Footer from "../components/Footer.astro";
 ---
 
 <BaseLayout title="About — builtbyvera">
-  <ComingSoon active="about" />
+  <Header />
+
+  <section class="about-simple">
+    <div class="about-simple-art">
+      <figure class="about-portrait-card">
+        <img src="/about/vera-portrait.png" alt="Illustrated portrait of Vera in a workspace" />
+        <figcaption>I research, technically?</figcaption>
+      </figure>
+    </div>
+
+    <div class="about-terminal" aria-label="About Vera terminal">
+      <div class="code-bio-chrome">
+        <span class="code-bio-dot red"></span>
+        <span class="code-bio-dot yellow"></span>
+        <span class="code-bio-dot green"></span>
+        <span class="code-bio-url">about.md</span>
+      </div>
+
+      <div class="about-terminal-body">
+        <p><span class="terminal-prompt">$</span> whoami</p>
+        <h1>I reverse-engineer technical products into stories and developer assets.</h1>
+
+        <p>
+          I started out in SaaS marketing and what we'd now call traditional SEO. I spent
+          years chasing rankings, surviving algorithm updates, and learning how products
+          earn attention. Eventually, I got bored and went back to my first love: engineering.
+        </p>
+
+        <p>
+          I earned an Advanced Diploma in Software Engineering, specializing in AI and
+          Machine Learning. Then I decided to merge both worlds.
+        </p>
+
+        <p>
+          These days, I build integrations, starter templates, demos, tutorials,
+          documentation, and technical content that help developers understand, trust,
+          and adopt products.
+        </p>
+
+        <p class="terminal-output">I honestly just like talking and shopping.</p>
+      </div>
+    </div>
+  </section>
+
+  <Navigation active="about" />
+  <Footer />
 </BaseLayout>
