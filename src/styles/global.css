@@ -101,13 +101,20 @@ header{
 }
 
 .logo{
+  color:var(--text);
+  text-decoration:none;
   font-size:1.3rem;
   font-weight:400;
   letter-spacing:-.04em;
+  transition:.25s;
 }
 
 .logo strong{
   font-weight:600;
+}
+
+.logo:hover{
+  color:var(--accent);
 }
 
 .socials{
