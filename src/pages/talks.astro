@@ -1,8 +1,51 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import ComingSoon from "../components/ComingSoon.astro";
+import Header from "../components/Header.astro";
+import Navigation from "../components/Navigation.astro";
+import Footer from "../components/Footer.astro";
+import { getCollection } from "astro:content";
+
+const talks = (await getCollection("talks")).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
 ---
 
 <BaseLayout title="Talks — builtbyvera">
-  <ComingSoon active="talks" />
+  <Header />
+
+  <section class="talks-hero">
+    <span class="prompt">$ talks</span>
+    <h1>Talks</h1>
+    <p>A small collection of sessions, workshops, and rooms I have led.</p>
+  </section>
+
+  <section class="talks-grid" aria-label="Talks">
+    {talks.map((talk) => (
+      <article class={`talk-card ${talk.data.cover ? "" : "talk-card-text"}`}>
+        {talk.data.cover ? (
+          <div class="talk-image-wrap">
+            <img src={talk.data.cover} alt={`${talk.data.title} event visual`} loading="lazy" />
+          </div>
+        ) : (
+          <div class="talk-text-mark" aria-hidden="true">
+            <span>AI</span>
+            <span>₦</span>
+          </div>
+        )}
+
+        <div class="talk-copy">
+          <div class="talk-meta">
+            <span>{talk.data.event}</span>
+            <span>{talk.data.date.getFullYear()}</span>
+          </div>
+          <h2>{talk.data.title}</h2>
+          <p>{talk.data.description}</p>
+          {talk.data.location && <span class="talk-location">{talk.data.location}</span>}
+        </div>
+      </article>
+    ))}
+  </section>
+
+  <Navigation active="talks" />
+  <Footer />
 </BaseLayout>
