@@ -1356,6 +1356,8 @@ nav a.active{
 
   .hero h1{
     font-size:3rem;
+    width:100%;
+    min-height:1.9em;
   }
 
   nav{
