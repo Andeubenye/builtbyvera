@@ -1242,6 +1242,22 @@ nav a.active{
   transform:rotate(8deg);
 }
 
+@media(min-width:901px){
+  .talks-grid{
+    gap:28px;
+    padding:34px 0 56px;
+  }
+
+  .talk-card{
+    min-height:640px;
+    border:1px solid var(--line);
+  }
+
+  .talk-card:last-child{
+    border-right:1px solid var(--line);
+  }
+}
+
 .looking-eye{
   position:relative;
   width:min(42vw, 320px);
