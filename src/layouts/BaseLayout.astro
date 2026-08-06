@@ -16,6 +16,17 @@ const { title = "builtbyvera" } = Astro.props as Props;
   <link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml" />
   <link rel="icon" href="/favicon-32x32.png?v=2" sizes="32x32" type="image/png" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2" />
+  <script is:inline>
+    (() => {
+      try {
+        const savedTheme = localStorage.getItem("builtbyvera-theme");
+        const useDark = savedTheme ? savedTheme === "dark" : true;
+        document.documentElement.classList.toggle("dark-mode", useDark);
+      } catch {
+        document.documentElement.classList.add("dark-mode");
+      }
+    })();
+  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +34,7 @@ const { title = "builtbyvera" } = Astro.props as Props;
   <style set:html={siteStyles}></style>
 </head>
 
-<body class="dark-mode">
+<body>
 
 <div class="page">
   <slot />
@@ -36,16 +47,17 @@ const { title = "builtbyvera" } = Astro.props as Props;
     const themeLabel = themeToggle.querySelector(".theme-toggle-label");
 
     function setTheme(dark) {
-      document.body.classList.toggle("dark-mode", dark);
+      document.documentElement.classList.toggle("dark-mode", dark);
+      localStorage.setItem("builtbyvera-theme", dark ? "dark" : "light");
       if (themeIcon) themeIcon.textContent = dark ? "☀" : "☾";
       if (themeLabel) themeLabel.textContent = dark ? "Light" : "Dark";
     }
 
     themeToggle.addEventListener("click", () => {
-      setTheme(!document.body.classList.contains("dark-mode"));
+      setTheme(!document.documentElement.classList.contains("dark-mode"));
     });
 
-    setTheme(document.body.classList.contains("dark-mode"));
+    setTheme(document.documentElement.classList.contains("dark-mode"));
   }
 </script>
 

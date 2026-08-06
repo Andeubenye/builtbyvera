@@ -19,6 +19,7 @@
   --node-bg:rgba(255,255,255,.88);
 }
 
+:root.dark-mode,
 body.dark-mode{
   --bg:#111217;
   --text:#F2F0EA;
